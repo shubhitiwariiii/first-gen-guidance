@@ -90,8 +90,8 @@ Create a `.env.local` file with:
 ## 📸 Screenshots
 
 > Dashboard with AI-matched scholarships based on student profile
+<img width="1365" height="634" alt="image" src="https://github.com/user-attachments/assets/e0e75fec-7cc7-43bb-bcec-5c9e9280c629" />
 
-*(Add screenshots here as features are built)*
 
 ---
 
