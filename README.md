@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# 🎓 First-Gen Guidance OS
 
-First, run the development server:
+### AI-powered scholarship & career guidance platform for first-generation Indian students
+
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-green?style=flat-square&logo=supabase&logoColor=white)](https://supabase.com/)
+[![Gemini AI](https://img.shields.io/badge/Gemini_AI-orange?style=flat-square&logo=google&logoColor=white)](https://aistudio.google.com/)
+[![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-black?style=flat-square&logo=vercel)](https://first-gen-guidance.vercel.app)
+
+**Live Demo → [first-gen-guidance.vercel.app](https://first-gen-guidance.vercel.app)**
+
+</div>
+
+---
+
+## 🧩 The Problem
+
+Students from non-English, non-urban families in India have **no one to guide them** through college applications, scholarships, or career decisions. Existing platforms are either US-focused, English-only, or require paid mentors.
+
+> 600M+ Indians are first-generation learners. Most miss scholarships they qualify for — simply because no one told them.
+
+---
+
+## ✅ What's Built
+
+| Feature | Status |
+|---|---|
+| Email auth (signup / login) | ✅ Live |
+| Multi-step onboarding (4 steps) | ✅ Live |
+| Student profile saved to database | ✅ Live |
+| AI scholarship finder (Gemini) | ✅ Live |
+| Dashboard with profile summary | ✅ Live |
+| Deployment on Vercel | ✅ Live |
+
+---
+
+## 🗺️ Roadmap
+
+| Feature | Status |
+|---|---|
+| Deadline tracker for applications | 🔨 In progress |
+| Peer mentor matching | 📅 Planned |
+| Vernacular language UI (Hindi, Tamil, Telugu...) | 📅 Planned |
+| Document upload for applications | 📅 Planned |
+| WhatsApp notifications for deadlines | 📅 Planned |
+| State-wise scholarship database | 📅 Planned |
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js 16, TypeScript, Tailwind CSS |
+| Backend | Next.js API Routes |
+| Database + Auth | Supabase (PostgreSQL + Row Level Security) |
+| AI | Google Gemini 2.0 Flash |
+| Deployment | Vercel |
+
+---
+
+## 🚀 Getting Started
 
 ```bash
+# Clone the repo
+git clone https://github.com/shubhitiwariiii/first-gen-guidance.git
+cd first-gen-guidance
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Fill in your Supabase and Gemini API keys
+
+# Run locally
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔐 Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file with:
+---
 
-## Learn More
+## 📸 Screenshots
 
-To learn more about Next.js, take a look at the following resources:
+> Dashboard with AI-matched scholarships based on student profile
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+*(Add screenshots here as features are built)*
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🎯 Target Users
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Class 10–12 students from Tier 2/3 cities
+- First-year UG students unaware of scholarship options
+- Students from families with annual income below ₹6 LPA
+- First-generation college goers with no guidance network
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 👩‍💻 Author
+
+**Shubhi Tiwari**
+B.Tech CSE (AI & ML) — Galgotias College of Engineering & Technology
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/shubhi-tiwari-664553329)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat-square&logo=github)](https://github.com/shubhitiwariiii)
+
+---
+
+<div align="center">
+Built to solve a real problem. For the students who had no one to ask.
+</div>
