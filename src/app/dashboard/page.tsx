@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import ScholarshipFinder from '@/components/ScholarshipFinder'
 import DeadlineTracker from '@/components/DeadlineTracker'
 import MentorList from '@/components/MentorList'
+import BecomeMentor from '@/components/BecomeMentor'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -53,6 +54,9 @@ export default async function DashboardPage() {
 
         {/* MentorList Profile */}
         <MentorList profile={profile} />
+
+        {/* Become Mentor Profile */}
+        <BecomeMentor userId={user.id} profile={profile} />
 
       </div>
     </div>
