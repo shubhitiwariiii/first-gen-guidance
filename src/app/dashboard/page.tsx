@@ -4,6 +4,7 @@ import ScholarshipFinder from '@/components/ScholarshipFinder'
 import DeadlineTracker from '@/components/DeadlineTracker'
 import MentorList from '@/components/MentorList'
 import BecomeMentor from '@/components/BecomeMentor'
+import DocumentUpload from '@/components/DocumentUpload'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -18,6 +19,15 @@ export default async function DashboardPage() {
     .single()
 
   if (!profile?.onboarding_complete) redirect('/onboarding')
+  const { data: documents } = await supabase
+    .from('documents')
+    .select('category')
+    .eq('user_id', user.id)
+
+  const requiredCategories = ['marksheet', 'income', 'id_proof', 'certificate']
+  const hasAllDocs = requiredCategories.every(
+    cat => documents?.some(d => d.category === cat)
+  )
 
   return (
     <div className="min-h-screen bg-gray-950 p-6">
@@ -47,7 +57,7 @@ export default async function DashboardPage() {
         </div>
 
         {/* Scholarship Finder */}
-        <ScholarshipFinder profile={profile} />
+        <ScholarshipFinder profile={profile} hasAllDocs={hasAllDocs} />
 
         {/* Deadline Tracker */}
         <DeadlineTracker userId={user.id} />
@@ -57,6 +67,10 @@ export default async function DashboardPage() {
 
         {/* Become Mentor Profile */}
         <BecomeMentor userId={user.id} profile={profile} />
+
+
+        {/* Document upload */}
+        <DocumentUpload userId={user.id} />
 
       </div>
     </div>

@@ -15,9 +15,25 @@ export default function LoginPage() {
   async function handleLogin() {
     setLoading(true)
     setError('')
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) setError(error.message)
-    else router.push('/onboarding')
+    const { error, data } = await supabase.auth.signInWithPassword({ email, password })
+    if (error) {
+      setError(error.message)
+      setLoading(false)
+      return
+    }
+
+    // Check if onboarding is already complete
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('onboarding_complete')
+      .eq('id', data.user.id)
+      .single()
+
+    if (profile?.onboarding_complete) {
+      router.push('/dashboard')
+    } else {
+      router.push('/onboarding')
+    }
     setLoading(false)
   }
 

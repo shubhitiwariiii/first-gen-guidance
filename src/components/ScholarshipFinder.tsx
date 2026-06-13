@@ -11,7 +11,7 @@ interface Scholarship {
   link: string
 }
 
-export default function ScholarshipFinder({ profile }: { profile: any }) {
+export default function ScholarshipFinder({ profile, hasAllDocs }: { profile: any, hasAllDocs: boolean }) {
   const [scholarships, setScholarships] = useState<Scholarship[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -49,10 +49,13 @@ export default function ScholarshipFinder({ profile }: { profile: any }) {
         </div>
         <button
           onClick={findScholarships}
-          disabled={loading}
-          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold disabled:opacity-50"
+          disabled={loading || !hasAllDocs}
+          className={`px-4 py-2 text-white rounded-lg text-sm font-semibold ${hasAllDocs
+              ? 'bg-blue-600 hover:bg-blue-700'
+              : 'bg-gray-700 cursor-not-allowed'
+            } disabled:opacity-50`}
         >
-          {loading ? 'Finding...' : fetched ? 'Refresh' : 'Find Scholarships'}
+          {!hasAllDocs ? '🔒 Upload Docs First' : loading ? 'Finding...' : fetched ? 'Refresh' : 'Find Scholarships'}
         </button>
       </div>
 
