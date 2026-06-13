@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import ScholarshipFinder from '@/components/ScholarshipFinder'
+import DeadlineTracker from '@/components/DeadlineTracker'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -46,10 +47,12 @@ export default async function DashboardPage() {
         {/* Scholarship Finder */}
         <ScholarshipFinder profile={profile} />
 
+        {/* Deadline Tracker */}
+        <DeadlineTracker userId={user.id} />
+
         {/* Coming soon cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4">
           {[
-            { title: '📅 Deadlines', desc: 'Track application dates' },
             { title: '🤝 Mentors', desc: 'Connect with peers' },
           ].map(card => (
             <div key={card.title} className="bg-gray-900 rounded-xl p-6 border border-gray-800">
