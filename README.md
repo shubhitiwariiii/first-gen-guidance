@@ -107,7 +107,6 @@ Create a `.env.local` file with:
 ## 👩‍💻 Author
 
 **Shubhi Tiwari**
-B.Tech CSE (AI & ML) — Galgotias College of Engineering & Technology
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/shubhi-tiwari-664553329)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat-square&logo=github)](https://github.com/shubhitiwariiii)
