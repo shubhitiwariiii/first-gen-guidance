@@ -18,27 +18,27 @@ export default function ScholarshipFinder({ profile }: { profile: any }) {
   const [fetched, setFetched] = useState(false)
 
   async function findScholarships() {
-  setLoading(true)
-  setError('')
-  try {
-    const res = await fetch('/api/scholarships', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(profile),
-    })
-    const data = await res.json()
-    if (!Array.isArray(data)) {
-      setError(data.error || 'Unexpected response. Try again.')
-      setLoading(false)
-      return
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch('/api/scholarships', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profile),
+      })
+      const data = await res.json()
+      if (!Array.isArray(data)) {
+        setError(data.error || 'Unexpected response. Try again.')
+        setLoading(false)
+        return
+      }
+      setScholarships(data)
+      setFetched(true)
+    } catch (e) {
+      setError('Failed to fetch scholarships. Try again.')
     }
-    setScholarships(data)
-    setFetched(true)
-  } catch (e) {
-    setError('Failed to fetch scholarships. Try again.')
+    setLoading(false)
   }
-  setLoading(false)
-}
 
   return (
     <div className="bg-gray-900 rounded-xl p-6 space-y-4">
@@ -76,14 +76,7 @@ export default function ScholarshipFinder({ profile }: { profile: any }) {
           <p className="text-gray-400 text-sm">{s.eligibility}</p>
           <div className="flex items-center justify-between pt-1">
             <span className="text-gray-500 text-xs">Deadline: {s.deadline}</span>
-            
-              href={s.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline text-xs"
-            <a>
-              Apply →
-            </a>
+            <a href={s.link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline text-xs">Apply →</a>
           </div>
         </div>
       ))}
