@@ -5,6 +5,7 @@ import DeadlineTracker from '@/components/DeadlineTracker'
 import MentorList from '@/components/MentorList'
 import BecomeMentor from '@/components/BecomeMentor'
 import DocumentUpload from '@/components/DocumentUpload'
+import Navbar from '@/components/Navbar'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -30,48 +31,41 @@ export default async function DashboardPage() {
   )
 
   return (
-    <div className="min-h-screen bg-gray-950 p-6">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gray-950">
+      <Navbar name={profile.full_name} />
+      <div className="p-6">
+        <div className="max-w-4xl mx-auto space-y-6">
 
-        {/* Header */}
-        <div className="bg-gray-900 rounded-xl p-6">
-          <h1 className="text-2xl font-bold text-white">
-            Welcome, {profile.full_name} 👋
-          </h1>
-          <p className="text-gray-400 mt-1">Your personalized guidance dashboard</p>
+          {/* Header */}
+          <div className="bg-gray-900 rounded-xl p-6">
+            <h1 className="text-2xl font-bold text-white">
+              Welcome, {profile.full_name} 
+            </h1>
+            <p className="text-gray-400 mt-1">Your personalized guidance dashboard</p>
+          </div>
+
+          {/* Profile summary */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { label: 'Class', value: profile.class_level },
+              { label: 'Stream', value: profile.stream },
+              { label: 'State', value: profile.state },
+              { label: 'Income Group', value: profile.family_income },
+            ].map(item => (
+              <div key={item.label} className="bg-gray-900 rounded-xl p-4">
+                <p className="text-gray-400 text-sm">{item.label}</p>
+                <p className="text-white font-semibold mt-1">{item.value || '—'}</p>
+              </div>
+            ))}
+          </div>
+
+          <ScholarshipFinder profile={profile} hasAllDocs={hasAllDocs} />
+          <DeadlineTracker userId={user.id} />
+          <MentorList profile={profile} />
+          <BecomeMentor userId={user.id} profile={profile} />
+          <DocumentUpload userId={user.id} />
+
         </div>
-
-        {/* Profile summary */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { label: 'Class', value: profile.class_level },
-            { label: 'Stream', value: profile.stream },
-            { label: 'State', value: profile.state },
-            { label: 'Income Group', value: profile.family_income },
-          ].map(item => (
-            <div key={item.label} className="bg-gray-900 rounded-xl p-4">
-              <p className="text-gray-400 text-sm">{item.label}</p>
-              <p className="text-white font-semibold mt-1">{item.value || '—'}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Scholarship Finder */}
-        <ScholarshipFinder profile={profile} hasAllDocs={hasAllDocs} />
-
-        {/* Deadline Tracker */}
-        <DeadlineTracker userId={user.id} />
-
-        {/* MentorList Profile */}
-        <MentorList profile={profile} />
-
-        {/* Become Mentor Profile */}
-        <BecomeMentor userId={user.id} profile={profile} />
-
-
-        {/* Document upload */}
-        <DocumentUpload userId={user.id} />
-
       </div>
     </div>
   )
