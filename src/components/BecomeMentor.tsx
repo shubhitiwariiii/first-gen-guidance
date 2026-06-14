@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { Star } from 'lucide-react'
 
 export default function BecomeMentor({ userId, profile }: { userId: string, profile: any }) {
   const supabase = createClient()
@@ -20,16 +21,10 @@ export default function BecomeMentor({ userId, profile }: { userId: string, prof
     whatsapp: profile.phone || '',
   })
 
-  useEffect(() => {
-    checkIfMentor()
-  }, [])
+  useEffect(() => { checkIfMentor() }, [])
 
   async function checkIfMentor() {
-    const { data } = await supabase
-      .from('mentors')
-      .select('id')
-      .eq('user_id', userId)
-      .single()
+    const { data } = await supabase.from('mentors').select('id').eq('user_id', userId).single()
     setIsMentor(!!data)
     setLoading(false)
   }
@@ -37,89 +32,88 @@ export default function BecomeMentor({ userId, profile }: { userId: string, prof
   async function handleSubmit() {
     if (!form.college || !form.bio) return
     setSaving(true)
-    const { error } = await supabase.from('mentors').insert({
-      user_id: userId,
-      ...form,
-      is_available: true,
-    })
-    if (!error) {
-      setIsMentor(true)
-      setOpen(false)
-      setSuccess(true)
-    }
+    const { error } = await supabase.from('mentors').insert({ user_id: userId, ...form, is_available: true })
+    if (!error) { setIsMentor(true); setOpen(false); setSuccess(true) }
     setSaving(false)
   }
 
   if (loading) return null
 
+  if (isMentor) return (
+    <div className="bg-white/3 border border-white/8 rounded-2xl p-5 flex items-center gap-4">
+      <div className="w-10 h-10 rounded-xl bg-violet-500/15 border border-violet-500/20 flex items-center justify-center shrink-0">
+        <Star className="w-5 h-5 text-violet-400" />
+      </div>
+      <div>
+        <h3 className="text-white font-semibold text-sm">You are a Mentor</h3>
+        <p className="text-gray-500 text-xs mt-0.5">Other students can find and connect with you</p>
+      </div>
+      <div className="ml-auto">
+        <span className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">Active</span>
+      </div>
+    </div>
+  )
+
   return (
-    <div className="bg-gray-900 rounded-xl p-6 border border-gray-800">
-      {success && (
-        <div className="bg-green-900 border border-green-700 text-green-400 rounded-lg p-3 text-sm mb-4">
-          🎉 You are now listed as a mentor! Other students can find and contact you.
-        </div>
-      )}
-
-      {isMentor ? (
+    <div className="bg-white/3 border border-white/8 rounded-2xl overflow-hidden">
+      <div className="px-6 py-5 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="text-2xl">🌟</span>
+          <div className="w-8 h-8 rounded-xl bg-violet-500/15 border border-violet-500/20 flex items-center justify-center">
+            <Star className="w-4 h-4 text-violet-400" />
+          </div>
           <div>
-            <h3 className="text-white font-bold">You are a Mentor</h3>
-            <p className="text-gray-400 text-sm">Other students can see your profile and reach out.</p>
+            <h3 className="text-white font-semibold text-sm">Become a Mentor</h3>
+            <p className="text-gray-500 text-xs">Help other first-gen students like you</p>
           </div>
         </div>
-      ) : (
-        <>
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-white font-bold">Become a Mentor</h3>
-              <p className="text-gray-400 text-sm">Help other first-gen students like you</p>
-            </div>
-            <button
-              onClick={() => setOpen(!open)}
-              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-semibold"
-            >
-              {open ? 'Cancel' : 'Register'}
-            </button>
-          </div>
+        <button
+          onClick={() => setOpen(!open)}
+          className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white text-xs rounded-xl font-semibold transition-all"
+        >
+          {open ? 'Cancel' : 'Register'}
+        </button>
+      </div>
 
-          {open && (
-            <div className="mt-4 space-y-3">
-              <input
-                placeholder="Full Name"
-                value={form.name}
-                onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                className="w-full p-2 rounded bg-gray-800 text-white text-sm border border-gray-700 focus:outline-none focus:border-purple-500"
-              />
-              <input
-                placeholder="College Name"
-                value={form.college}
-                onChange={e => setForm(f => ({ ...f, college: e.target.value }))}
-                className="w-full p-2 rounded bg-gray-800 text-white text-sm border border-gray-700 focus:outline-none focus:border-purple-500"
-              />
-              <input
-                placeholder="WhatsApp Number"
-                value={form.whatsapp}
-                onChange={e => setForm(f => ({ ...f, whatsapp: e.target.value }))}
-                className="w-full p-2 rounded bg-gray-800 text-white text-sm border border-gray-700 focus:outline-none focus:border-purple-500"
-              />
-              <textarea
-                placeholder="Write a short bio — what can you help with? (e.g. JEE prep, NSP scholarship, hostel life)"
-                value={form.bio}
-                onChange={e => setForm(f => ({ ...f, bio: e.target.value }))}
-                rows={3}
-                className="w-full p-2 rounded bg-gray-800 text-white text-sm border border-gray-700 focus:outline-none focus:border-purple-500 resize-none"
-              />
-              <button
-                onClick={handleSubmit}
-                disabled={saving}
-                className="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-semibold disabled:opacity-50"
-              >
-                {saving ? 'Saving...' : 'Submit & Become a Mentor'}
-              </button>
+      {open && (
+        <div className="px-6 pb-6 space-y-3 border-t border-white/5 pt-4">
+          {success && (
+            <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-4 py-3 rounded-xl">
+              🎉 You are now listed as a mentor!
             </div>
           )}
-        </>
+          <input
+            placeholder="Full Name"
+            value={form.name}
+            onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+            className="w-full px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-xs placeholder-gray-600 focus:outline-none focus:border-violet-500 transition-all"
+          />
+          <input
+            placeholder="College Name"
+            value={form.college}
+            onChange={e => setForm(f => ({ ...f, college: e.target.value }))}
+            className="w-full px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-xs placeholder-gray-600 focus:outline-none focus:border-violet-500 transition-all"
+          />
+          <input
+            placeholder="WhatsApp Number"
+            value={form.whatsapp}
+            onChange={e => setForm(f => ({ ...f, whatsapp: e.target.value }))}
+            className="w-full px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-xs placeholder-gray-600 focus:outline-none focus:border-violet-500 transition-all"
+          />
+          <textarea
+            placeholder="Short bio — what can you help with?"
+            value={form.bio}
+            onChange={e => setForm(f => ({ ...f, bio: e.target.value }))}
+            rows={3}
+            className="w-full px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-xs placeholder-gray-600 focus:outline-none focus:border-violet-500 transition-all resize-none"
+          />
+          <button
+            onClick={handleSubmit}
+            disabled={saving}
+            className="w-full py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-xs font-semibold transition-all disabled:opacity-50"
+          >
+            {saving ? 'Saving...' : 'Submit & Become a Mentor'}
+          </button>
+        </div>
       )}
     </div>
   )
