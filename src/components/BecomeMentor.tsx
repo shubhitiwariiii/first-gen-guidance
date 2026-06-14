@@ -48,8 +48,17 @@ export default function BecomeMentor({ userId, profile }: { userId: string, prof
         <h3 className="text-white font-semibold text-sm">You are a Mentor</h3>
         <p className="text-gray-500 text-xs mt-0.5">Other students can find and connect with you</p>
       </div>
-      <div className="ml-auto">
+      <div className="ml-auto flex items-center gap-2">
         <span className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">Active</span>
+        <button
+          onClick={async () => {
+            await supabase.from('mentors').delete().eq('user_id', userId)
+            setIsMentor(false)
+          }}
+          className="text-xs text-gray-500 hover:text-red-400 bg-white/3 hover:bg-red-500/10 border border-white/8 hover:border-red-500/20 px-2.5 py-1 rounded-full transition-all"
+        >
+          Remove me
+        </button>
       </div>
     </div>
   )
