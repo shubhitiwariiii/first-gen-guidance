@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎓 First-Gen Guidance OS
+# 🎓 FirstGen Guidance
 
 ### AI-powered scholarship & career guidance platform for first-generation Indian students
 
@@ -24,6 +24,27 @@ Students from non-English, non-urban families in India have **no one to guide th
 
 ---
 
+## 📸 Screenshots
+
+### Landing Page
+![Landing Hero](screenshots/1-landing-hero.png)
+![Landing Features](screenshots/2-landing-features.png)
+![Landing How It Works](screenshots/3-landing-How-Works.png)
+
+### Auth & Onboarding
+![Signup](screenshots/4-signup.png)
+![Onboarding](screenshots/5-onboarding.png)
+
+### Dashboard
+![Dashboard](screenshots/6-dashboard.png)
+![Mentors](screenshots/7-mentors.png)
+![Documents](screenshots/9-documents.png)
+
+### Profile
+![Profile](screenshots/8-profile.png)
+
+---
+
 ## ✅ What's Built
 
 | Feature | Status |
@@ -32,7 +53,12 @@ Students from non-English, non-urban families in India have **no one to guide th
 | Multi-step onboarding (4 steps) | ✅ Live |
 | Student profile saved to database | ✅ Live |
 | AI scholarship finder (Gemini) | ✅ Live |
-| Dashboard with profile summary | ✅ Live |
+| Deadline tracker | ✅ Live |
+| Peer mentor matching | ✅ Live |
+| Become a mentor registration | ✅ Live |
+| Document upload with checklist | ✅ Live |
+| Profile edit page | ✅ Live |
+| Modern dark UI with sidebar | ✅ Live |
 | Deployment on Vercel | ✅ Live |
 
 ---
@@ -41,12 +67,10 @@ Students from non-English, non-urban families in India have **no one to guide th
 
 | Feature | Status |
 |---|---|
-| Deadline tracker for applications | 🔨 In progress |
-| Peer mentor matching | 📅 Planned |
-| Vernacular language UI (Hindi, Tamil, Telugu...) | 📅 Planned |
-| Document upload for applications | 📅 Planned |
-| WhatsApp notifications for deadlines | 📅 Planned |
+| Vernacular language UI (Hindi, Tamil...) | 📅 Planned |
+| WhatsApp deadline notifications | 📅 Planned |
 | State-wise scholarship database | 📅 Planned |
+| Mobile app (React Native) | 📅 Planned |
 
 ---
 
@@ -57,6 +81,7 @@ Students from non-English, non-urban families in India have **no one to guide th
 | Frontend | Next.js 16, TypeScript, Tailwind CSS |
 | Backend | Next.js API Routes |
 | Database + Auth | Supabase (PostgreSQL + Row Level Security) |
+| File Storage | Supabase Storage |
 | AI | Google Gemini 2.0 Flash |
 | Deployment | Vercel |
 
@@ -84,15 +109,13 @@ npm run dev
 
 ## 🔐 Environment Variables
 
-Create a `.env.local` file with:
----
+Create a `.env.local` file:
 
-## 📸 Screenshots
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 
-> Dashboard with AI-matched scholarships based on student profile
-<img width="1365" height="634" alt="image" src="https://github.com/user-attachments/assets/e0e75fec-7cc7-43bb-bcec-5c9e9280c629" />
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-
+GEMINI_API_KEY=your_gemini_api_key
 ---
 
 ## 🎯 Target Users
@@ -106,7 +129,8 @@ Create a `.env.local` file with:
 
 ## 👩‍💻 Author
 
-**Shubhi Tiwari**
+**Shubhi Tiwari**  
+B.Tech CSE (AI & ML) — Galgotias College of Engineering & Technology
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/shubhi-tiwari-664553329)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat-square&logo=github)](https://github.com/shubhitiwariiii)
