@@ -54,13 +54,20 @@ export default function BecomeMentor({ userId, profile }: { userId: string, prof
           onClick={async () => {
             await supabase.from('mentors').delete().eq('user_id', userId)
             setIsMentor(false)
+            // Verify deletion
+            const { data } = await supabase
+              .from('mentors')
+              .select('id')
+              .eq('user_id', userId)
+              .single()
+            setIsMentor(!!data)
           }}
           className="text-xs text-gray-500 hover:text-red-400 bg-white/3 hover:bg-red-500/10 border border-white/8 hover:border-red-500/20 px-2.5 py-1 rounded-full transition-all"
         >
           Remove me
         </button>
       </div>
-    </div>
+    </div >
   )
 
   return (
