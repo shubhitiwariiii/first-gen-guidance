@@ -160,7 +160,8 @@ export default function LandingPage() {
             ].map((item, i) => (
               <div key={item.step} className="relative">
                 {i < 2 && (
-                  <div className="hidden md:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-white/10 to-transparent z-10" />
+
+                  <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-px bg-gradient-to-r from-white/10 to-transparent z-10" />
                 )}
                 <div className={`text-5xl font-bold ${item.color} mb-4 opacity-50`}>{item.step}</div>
                 <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
@@ -177,12 +178,12 @@ export default function LandingPage() {
           <div className="relative rounded-3xl overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.1),_transparent)]" />
-            <div className="relative px-8 py-16 text-center">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">Ready to find your scholarship?</h2>
-              <p className="text-blue-200 text-lg mb-8 max-w-xl mx-auto">
+            <div className="relative px-6 py-12 md:px-12 md:py-16 text-center">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">Ready to find your scholarship?</h2>
+              <p className="text-blue-200 text-base md:text-lg mb-8 max-w-xl mx-auto">
                 Join thousands of first-gen students getting the guidance they deserve.
               </p>
-              <Link href="/signup" className="inline-flex items-center gap-2 bg-white text-blue-700 px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all hover:scale-105">
+              <Link href="/signup" className="inline-flex items-center gap-2 bg-white text-blue-700 px-6 py-3 md:px-8 md:py-4 rounded-xl font-bold text-base md:text-lg hover:bg-blue-50 transition-all hover:scale-105">
                 Get Started Free
                 <ArrowRight className="w-5 h-5" />
               </Link>
