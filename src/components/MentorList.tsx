@@ -54,7 +54,7 @@ export default function MentorList({ profile }: { profile: any }) {
       .from('mentors')
       .select('*')
       .eq('is_available', true)
-      .neq('user_id', user?.id)
+      .or(`user_id.is.null,user_id.neq.${user?.id}`)
     setMentors(data || [])
     setFiltered(data || [])
     setLoading(false)
@@ -84,8 +84,8 @@ export default function MentorList({ profile }: { profile: any }) {
               key={tab.value}
               onClick={() => setFilter(tab.value)}
               className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${filter === tab.value
-                  ? 'bg-violet-600 text-white'
-                  : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/8'
+                ? 'bg-violet-600 text-white'
+                : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/8'
                 }`}
             >
               {tab.label}
