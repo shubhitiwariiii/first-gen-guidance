@@ -41,7 +41,7 @@ export default function LandingPage() {
             Free · For Indian Students · No Paid Mentors Needed
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight mb-6">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
             Your guide to
             <span className="block bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent">
               scholarships,
@@ -78,7 +78,7 @@ export default function LandingPage() {
 
       {/* Stats */}
       <section className="py-16 px-6 border-y border-white/5">
-        <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
             { number: '600M+', label: 'First-gen learners in India' },
             { number: '₹50K+', label: 'Avg scholarship per student' },
@@ -97,7 +97,7 @@ export default function LandingPage() {
 
       {/* Features */}
       <section id="features" className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything you need, in one place</h2>
             <p className="text-gray-400 max-w-xl mx-auto">A complete platform built specifically for first-generation Indian students.</p>
@@ -150,7 +150,7 @@ export default function LandingPage() {
 
       {/* How it works */}
       <section id="how-it-works" className="py-24 px-6 border-t border-white/5">
-        <div className="max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">How it works</h2>
             <p className="text-gray-400">From confused to confident in three simple steps.</p>

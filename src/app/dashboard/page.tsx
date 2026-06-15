@@ -38,10 +38,10 @@ export default async function DashboardPage() {
       <Sidebar name={profile.full_name} email={user.email} />
 
       {/* Main content */}
-      <main className="flex-1 ml-[220px] min-h-screen">
+      <main className="flex-1 lg:ml-[220px] min-h-screen">
 
         {/* Top header bar */}
-        <div className="sticky top-0 z-40 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-xl px-8 py-4">
+        <div className="sticky top-0 z-40 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-xl px-6 py-4 pl-16 lg:pl-6">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-white font-semibold">Dashboard</h1>
@@ -65,7 +65,7 @@ export default async function DashboardPage() {
         <div className="p-8 space-y-8">
 
           {/* Stats row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { label: 'Class', value: profile.class_level, icon: '🎓' },
               { label: 'Stream', value: profile.stream, icon: '📚' },

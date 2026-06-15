@@ -19,10 +19,10 @@ export default async function ProfilePage() {
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white flex">
       <Sidebar name={profile.full_name} email={user.email} />
-      <main className="flex-1 ml-[220px]">
+      <main className="flex-1 lg:ml-[220px]">
 
         {/* Header */}
-        <div className="sticky top-0 z-40 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-xl px-8 py-4">
+        <div className="sticky top-0 z-40 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-xl px-6 py-4 pl-16 lg:pl-6">
           <h1 className="text-white font-semibold">Edit Profile</h1>
           <p className="text-gray-500 text-xs mt-0.5">Update your details for better scholarship matching</p>
         </div>
