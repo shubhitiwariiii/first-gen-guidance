@@ -41,7 +41,7 @@ export default async function DashboardPage() {
       <main className="flex-1 lg:ml-[220px] min-h-screen">
 
         {/* Top header bar */}
-        <div className="sticky top-0 z-40 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-xl px-4 py-3 pl-14 lg:px-8 lg:py-4 lg:pl-8">
+        <div className="sticky top-0 z-40 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-xl px-4 py-3 pl-16 lg:px-8 lg:py-4 lg:pl-8">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-white font-semibold text-sm lg:text-base">Dashboard</h1>

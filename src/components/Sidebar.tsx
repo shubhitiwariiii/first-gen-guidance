@@ -66,7 +66,7 @@ export default function Sidebar({ name, email }: { name: string, email?: string 
         </nav>
 
         {/* Progress */}
-        <div className="px-3 flex-1">
+        <div className="px-3">
           <p className="text-gray-600 text-xs font-medium uppercase tracking-wider px-3 mb-3">Your Progress</p>
           <div className="space-y-1.5">
             {[
