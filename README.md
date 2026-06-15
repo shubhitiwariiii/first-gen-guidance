@@ -111,12 +111,11 @@ npm run dev
 
 Create a `.env.local` file:
 
+```env
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-
 GEMINI_API_KEY=your_gemini_api_key
----
+```
 
 ## 🎯 Target Users
 
@@ -130,7 +129,6 @@ GEMINI_API_KEY=your_gemini_api_key
 ## 👩‍💻 Author
 
 **Shubhi Tiwari**  
-B.Tech CSE (AI & ML) — Galgotias College of Engineering & Technology
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/shubhi-tiwari-664553329)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat-square&logo=github)](https://github.com/shubhitiwariiii)
