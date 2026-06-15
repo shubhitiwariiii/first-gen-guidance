@@ -160,8 +160,7 @@ export default function LandingPage() {
             ].map((item, i) => (
               <div key={item.step} className="relative">
                 {i < 2 && (
-
-                  <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-px bg-gradient-to-r from-white/10 to-transparent z-10" />
+                  <div className="hidden md:block absolute top-8 left-full w-16 h-px bg-white/10 z-10" />
                 )}
                 <div className={`text-5xl font-bold ${item.color} mb-4 opacity-50`}>{item.step}</div>
                 <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
