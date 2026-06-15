@@ -31,7 +31,6 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-6">
-        {/* Background glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[400px] h-[300px] bg-blue-500/10 rounded-full blur-[80px] pointer-events-none" />
 
@@ -55,16 +54,15 @@ export default function LandingPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Link href="/signup" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25">
+            <Link href="/signup" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25">
               Start for Free
               <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link href="/login" className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all">
+            <Link href="/login" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all">
               Log in
             </Link>
           </div>
 
-          {/* Trust badges */}
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500">
             {['No credit card required', 'Always free', 'Built for Bharat'].map(item => (
               <div key={item} className="flex items-center gap-2">
@@ -78,7 +76,7 @@ export default function LandingPage() {
 
       {/* Stats */}
       <section className="py-16 px-6 border-y border-white/5">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
             { number: '600M+', label: 'First-gen learners in India' },
             { number: '₹50K+', label: 'Avg scholarship per student' },
@@ -97,13 +95,12 @@ export default function LandingPage() {
 
       {/* Features */}
       <section id="features" className="py-24 px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything you need, in one place</h2>
             <p className="text-gray-400 max-w-xl mx-auto">A complete platform built specifically for first-generation Indian students.</p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               {
                 icon: Search,
@@ -150,12 +147,11 @@ export default function LandingPage() {
 
       {/* How it works */}
       <section id="how-it-works" className="py-24 px-6 border-t border-white/5">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">How it works</h2>
             <p className="text-gray-400">From confused to confident in three simple steps.</p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { step: '01', title: 'Create your profile', desc: 'Tell us your class, stream, state, and family income in 2 minutes.', color: 'text-blue-400' },
