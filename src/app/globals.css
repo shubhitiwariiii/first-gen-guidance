@@ -39,3 +39,12 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+select option {
+  background-color: #1a1a2e;
+  color: #e2e8f0;
+}
+
+select {
+  color-scheme: dark;
+}
