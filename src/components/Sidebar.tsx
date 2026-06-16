@@ -6,7 +6,13 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { GraduationCap, LayoutDashboard, User, LogOut, Menu, X } from 'lucide-react'
 
-export default function Sidebar({ name, email, uploadedCount = 0 }: { name: string, email?: string, uploadedCount?: number }) {
+export default function Sidebar({ name, email, uploadedCount = 0, scholarshipsFound = false, deadlinesCount = 0 }: { 
+  name: string, 
+  email?: string, 
+  uploadedCount?: number,
+  scholarshipsFound?: boolean,
+  deadlinesCount?: number
+}) {
   const supabase = createClient()
   const router = useRouter()
   const [loggingOut, setLoggingOut] = useState(false)
@@ -21,8 +27,8 @@ export default function Sidebar({ name, email, uploadedCount = 0 }: { name: stri
   const steps = [
     { label: 'Create profile', done: true, icon: '👤' },
     { label: 'Upload documents', done: uploadedCount >= 4, icon: '📄' },
-    { label: 'Find scholarships', done: false, icon: '🎓' },
-    { label: 'Add deadlines', done: false, icon: '📅' },
+    { label: 'Find scholarships', done: scholarshipsFound, icon: '🎓' },
+    { label: 'Add deadlines', done: deadlinesCount > 0, icon: '📅' },
   ]
 
   const completedSteps = steps.filter(s => s.done).length
@@ -30,7 +36,6 @@ export default function Sidebar({ name, email, uploadedCount = 0 }: { name: stri
 
   return (
     <>
-      {/* Mobile menu button */}
       <button
         onClick={() => setOpen(true)}
         className="lg:hidden fixed top-4 left-4 z-50 w-9 h-9 bg-[#0d0d14] border border-white/10 rounded-lg flex items-center justify-center"
@@ -38,7 +43,6 @@ export default function Sidebar({ name, email, uploadedCount = 0 }: { name: stri
         <Menu className="w-4 h-4 text-gray-400" />
       </button>
 
-      {/* Overlay */}
       {open && (
         <div
           className="lg:hidden fixed inset-0 bg-black/60 z-40 backdrop-blur-sm"
@@ -46,10 +50,8 @@ export default function Sidebar({ name, email, uploadedCount = 0 }: { name: stri
         />
       )}
 
-      {/* Sidebar */}
       <aside className={`fixed left-0 top-0 h-screen w-[220px] bg-[#0d0d14] border-r border-white/5 flex flex-col z-50 transition-transform duration-300 ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
 
-        {/* Logo */}
         <div className="px-5 py-5 border-b border-white/5 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shrink-0">
@@ -62,7 +64,6 @@ export default function Sidebar({ name, email, uploadedCount = 0 }: { name: stri
           </button>
         </div>
 
-        {/* Nav */}
         <nav className="px-3 py-4 space-y-0.5">
           <p className="text-gray-600 text-xs font-medium uppercase tracking-wider px-3 mb-3">Navigation</p>
           <Link href="/dashboard" onClick={() => setOpen(false)} className="flex items-center gap-3 px-3 py-2 rounded-lg text-white bg-white/5 border border-white/8 text-sm">
@@ -75,7 +76,6 @@ export default function Sidebar({ name, email, uploadedCount = 0 }: { name: stri
           </Link>
         </nav>
 
-        {/* Progress */}
         <div className="px-3">
           <p className="text-gray-600 text-xs font-medium uppercase tracking-wider px-3 mb-3">Your Progress</p>
           <div className="space-y-1.5">
@@ -103,7 +103,6 @@ export default function Sidebar({ name, email, uploadedCount = 0 }: { name: stri
           </div>
         </div>
 
-        {/* User + logout */}
         <div className="mt-auto px-3 py-4 border-t border-white/5 space-y-1">
           <button
             onClick={handleLogout}

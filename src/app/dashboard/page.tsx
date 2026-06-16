@@ -31,11 +31,22 @@ export default async function DashboardPage() {
     cat => documents?.some(d => d.category === cat)
   )
 
+  const { count: deadlinesCount } = await supabase
+    .from('deadlines')
+    .select('*', { count: 'exact', head: true })
+    .eq('user_id', user.id)
+
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white flex">
 
       {/* Sidebar */}
-      <Sidebar name={profile.full_name} email={user.email} uploadedCount={documents?.length || 0} />
+      <Sidebar
+        name={profile.full_name}
+        email={user.email}
+        uploadedCount={documents?.length || 0}
+        deadlinesCount={deadlinesCount || 0}
+        scholarshipsFound={true}
+      />
 
       {/* Main content */}
       <main className="flex-1 lg:ml-[220px] min-h-screen">
