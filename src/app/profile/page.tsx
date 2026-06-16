@@ -18,7 +18,7 @@ export default async function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white flex">
-      <Sidebar name={profile.full_name} email={user.email} uploadedCount={documents?.length || 0} />
+      <Sidebar name={profile.full_name} email={user.email} />
       <main className="flex-1 lg:ml-[220px]">
 
         {/* Header */}

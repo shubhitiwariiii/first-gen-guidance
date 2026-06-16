@@ -35,7 +35,7 @@ export default async function DashboardPage() {
     <div className="min-h-screen bg-[#0a0a0f] text-white flex">
 
       {/* Sidebar */}
-      <Sidebar name={profile.full_name} email={user.email} uploadedCount={documents?.length || 0} />
+      <Sidebar name={profile.full_name} email={user.email} />
 
       {/* Main content */}
       <main className="flex-1 lg:ml-[220px] min-h-screen">
