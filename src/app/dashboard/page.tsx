@@ -6,6 +6,8 @@ import MentorList from '@/components/MentorList'
 import BecomeMentor from '@/components/BecomeMentor'
 import DocumentUpload from '@/components/DocumentUpload'
 import Sidebar from '@/components/Sidebar'
+import ApplicationTracker from '@/components/ApplicationTracker'
+
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -114,6 +116,9 @@ export default async function DashboardPage() {
               </div>
               <div id="documents">
                 <DocumentUpload userId={user.id} />
+              </div>
+              <div id="applications">
+                <ApplicationTracker userId={user.id} />
               </div>
             </div>
 
