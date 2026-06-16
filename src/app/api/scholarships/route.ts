@@ -40,7 +40,10 @@ Return ONLY a valid JSON array. No explanation, no markdown, no backticks. Just 
 
     const data = await res.json();
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+    console.log("RAW:", JSON.stringify(data).slice(0, 500));
     const match = text.match(/\[[\s\S]*\]/);
+    if (!match)
+      throw new Error("No JSON array found in response: " + text.slice(0, 200));
     if (!match) throw new Error("No JSON array found in response");
     const scholarships = JSON.parse(match[0]);
     return NextResponse.json(scholarships);
