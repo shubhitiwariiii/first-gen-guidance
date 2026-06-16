@@ -7,8 +7,7 @@ export async function POST(request: Request) {
   const profile = await request.json()
 
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
-
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-8b' })
     const prompt = `You are a scholarship advisor for Indian students. Based on this student profile, return exactly 5 scholarships they are most eligible for.
 
 Student Profile:
