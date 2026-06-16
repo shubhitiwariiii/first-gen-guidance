@@ -6,7 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { GraduationCap, LayoutDashboard, User, LogOut, Menu, X } from 'lucide-react'
 
-export default function Sidebar({ name, email }: { name: string, email?: string }) {
+export default function Sidebar({ name, email, uploadedCount = 0 }: { name: string, email?: string, uploadedCount?: number }) {
   const supabase = createClient()
   const router = useRouter()
   const [loggingOut, setLoggingOut] = useState(false)
@@ -17,6 +17,16 @@ export default function Sidebar({ name, email }: { name: string, email?: string 
     await supabase.auth.signOut()
     router.push('/')
   }
+
+  const steps = [
+    { label: 'Create profile', done: true, icon: '👤' },
+    { label: 'Upload documents', done: uploadedCount >= 4, icon: '📄' },
+    { label: 'Find scholarships', done: false, icon: '🎓' },
+    { label: 'Add deadlines', done: false, icon: '📅' },
+  ]
+
+  const completedSteps = steps.filter(s => s.done).length
+  const progressPercent = Math.round((completedSteps / steps.length) * 100)
 
   return (
     <>
@@ -69,12 +79,7 @@ export default function Sidebar({ name, email }: { name: string, email?: string 
         <div className="px-3">
           <p className="text-gray-600 text-xs font-medium uppercase tracking-wider px-3 mb-3">Your Progress</p>
           <div className="space-y-1.5">
-            {[
-              { label: 'Create profile', done: true, icon: '👤' },
-              { label: 'Upload documents', done: false, icon: '📄' },
-              { label: 'Find scholarships', done: false, icon: '🎓' },
-              { label: 'Add deadlines', done: false, icon: '📅' },
-            ].map(item => (
+            {steps.map(item => (
               <div key={item.label} className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${item.done ? 'bg-blue-500/8 border border-blue-500/15' : 'bg-white/3 border border-white/5'}`}>
                 <span className="text-sm shrink-0">{item.icon}</span>
                 <span className={`text-xs flex-1 ${item.done ? 'text-blue-300' : 'text-gray-400'}`}>{item.label}</span>
@@ -87,16 +92,19 @@ export default function Sidebar({ name, email }: { name: string, email?: string 
           <div className="mt-4 px-3">
             <div className="flex items-center justify-between mb-1.5">
               <span className="text-gray-600 text-xs">Setup progress</span>
-              <span className="text-blue-400 text-xs font-semibold">25%</span>
+              <span className="text-blue-400 text-xs font-semibold">{progressPercent}%</span>
             </div>
             <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full w-1/4 bg-gradient-to-r from-blue-500 to-blue-400 rounded-full" />
+              <div
+                className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full transition-all duration-500"
+                style={{ width: `${progressPercent}%` }}
+              />
             </div>
           </div>
         </div>
 
         {/* User + logout */}
-        <div className="px-3 py-4 border-t border-white/5 space-y-1">
+        <div className="mt-auto px-3 py-4 border-t border-white/5 space-y-1">
           <button
             onClick={handleLogout}
             disabled={loggingOut}
