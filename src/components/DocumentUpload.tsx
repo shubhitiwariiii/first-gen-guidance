@@ -48,6 +48,12 @@ export default function DocumentUpload({ userId }: { userId: string }) {
     const { error: uploadError } = await supabase.storage.from('documents').upload(filePath, file)
     if (uploadError) { setError(uploadError.message); setUploading(false); return }
     await supabase.from('documents').insert({ user_id: userId, name: file.name, file_path: filePath, file_size: file.size, category })
+
+    // Auto-advance to next missing category
+    const updatedCategories = [...uploadedCategories, category]
+    const nextMissing = REQUIRED.find(cat => !updatedCategories.includes(cat))
+    if (nextMissing) setCategory(nextMissing)
+
     fetchDocuments()
     setUploading(false)
   }
@@ -127,9 +133,8 @@ export default function DocumentUpload({ userId }: { userId: string }) {
         </select>
 
         <label
-          className={`relative flex flex-col items-center justify-center w-full py-6 border-2 border-dashed rounded-xl cursor-pointer transition-all ${
-            dragOver ? 'border-blue-500 bg-blue-500/10' : 'border-white/10 hover:border-white/20 hover:bg-white/3'
-          } ${uploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`relative flex flex-col items-center justify-center w-full py-6 border-2 border-dashed rounded-xl cursor-pointer transition-all ${dragOver ? 'border-blue-500 bg-blue-500/10' : 'border-white/10 hover:border-white/20 hover:bg-white/3'
+            } ${uploading ? 'opacity-50 cursor-not-allowed' : ''}`}
           onDragOver={e => { e.preventDefault(); setDragOver(true) }}
           onDragLeave={() => setDragOver(false)}
           onDrop={e => {
@@ -157,7 +162,7 @@ export default function DocumentUpload({ userId }: { userId: string }) {
 
       {/* Files list */}
       <div className="px-6 py-4 space-y-2">
-        {loading && [1,2].map(i => <div key={i} className="h-12 bg-white/5 rounded-xl animate-pulse" />)}
+        {loading && [1, 2].map(i => <div key={i} className="h-12 bg-white/5 rounded-xl animate-pulse" />)}
 
         {!loading && documents.length === 0 && (
           <p className="text-gray-600 text-xs text-center py-4">No documents uploaded yet</p>
