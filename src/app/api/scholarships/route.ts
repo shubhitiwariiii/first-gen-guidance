@@ -1,5 +1,29 @@
 import { NextResponse } from "next/server";
 
+function getProviderFallback(provider: string): string {
+  const p = provider.toLowerCase();
+  if (p.includes("hdfc"))
+    return "https://www.hdfcbank.com/personal/online-banking/aro/parivartan-scholarship";
+  if (p.includes("aicte")) return "https://www.aicte-india.org";
+  if (p.includes("ugc")) return "https://www.ugc.gov.in";
+  if (p.includes("up") || p.includes("uttar pradesh"))
+    return "https://scholarship.up.gov.in";
+  if (p.includes("sitaram jindal"))
+    return "https://www.sitaramjindalfoundation.org";
+  if (p.includes("colgate")) return "https://www.keepindiasmiling.com";
+  if (p.includes("aditya birla"))
+    return "https://www.adityabirlacapital.com/scholarship";
+  if (p.includes("tata")) return "https://www.tatatrusts.org";
+  if (p.includes("reliance")) return "https://www.reliancefoundation.org";
+  if (p.includes("swami dayanand"))
+    return "https://www.sdef.org.in";
+  if (p.includes("nsdl") || p.includes("vidyasaarathi"))
+    return "https://www.vidyasaarathi.co.in";
+  if (p.includes("indian oil") || p.includes("indianoil"))
+    return "https://iocl.com";
+  return "https://scholarships.gov.in"; // default for govt/unknown
+}
+
 export async function POST(request: Request) {
   const profile = await request.json();
 
@@ -52,7 +76,7 @@ Return ONLY a valid JSON array, sorted by match_score descending. No explanation
       throw new Error("No JSON array found in response: " + text.slice(0, 200));
     const scholarships = JSON.parse(match[0]);
 
-    // Verify links are live, replace broken ones with a safe fallback
+    // Verify links are live, replace broken ones with a relevant provider fallback
     const verifiedScholarships = await Promise.all(
       scholarships.map(async (s: any) => {
         try {
@@ -63,9 +87,9 @@ Return ONLY a valid JSON array, sorted by match_score descending. No explanation
           if (checkRes.ok || checkRes.status < 400) {
             return s;
           }
-          return { ...s, link: "https://scholarships.gov.in" };
+          return { ...s, link: getProviderFallback(s.provider) };
         } catch {
-          return { ...s, link: "https://scholarships.gov.in" };
+          return { ...s, link: getProviderFallback(s.provider) };
         }
       }),
     );
