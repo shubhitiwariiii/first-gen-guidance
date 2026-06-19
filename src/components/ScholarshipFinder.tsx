@@ -10,6 +10,15 @@ interface Scholarship {
   eligibility: string
   deadline: string
   link: string
+  match_score?: number
+  match_reason?: string
+}
+
+function getMatchStyle(score?: number) {
+  if (score === undefined) return null
+  if (score >= 80) return 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
+  if (score >= 50) return 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20'
+  return 'text-gray-400 bg-gray-500/10 border-gray-500/20'
 }
 
 export default function ScholarshipFinder({ profile, hasAllDocs }: { profile: any, hasAllDocs: boolean }) {
@@ -103,13 +112,23 @@ export default function ScholarshipFinder({ profile, hasAllDocs }: { profile: an
         {!loading && scholarships.map((s, i) => (
           <div key={i} className="group p-4 bg-white/3 border border-white/5 rounded-xl hover:bg-white/5 hover:border-white/10 transition-all mb-3 last:mb-0">
             <div className="flex items-start justify-between gap-3 mb-2">
-              <h3 className="text-white text-sm font-semibold leading-snug">{s.name}</h3>
-              <span className="text-emerald-400 font-bold text-xs whitespace-nowrap bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded-lg shrink-0">
-                {s.amount}
-              </span>
+              <h3 className="text-white text-sm font-semibold leading-snug flex-1">{s.name}</h3>
+              <div className="flex items-center gap-1.5 shrink-0">
+                {s.match_score !== undefined && (
+                  <span className={`font-bold text-xs whitespace-nowrap border px-2 py-1 rounded-lg ${getMatchStyle(s.match_score)}`}>
+                    {s.match_score}% match
+                  </span>
+                )}
+                <span className="text-emerald-400 font-bold text-xs whitespace-nowrap bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded-lg">
+                  {s.amount}
+                </span>
+              </div>
             </div>
             <p className="text-blue-400 text-xs mb-1">{s.provider}</p>
-            <p className="text-gray-500 text-xs mb-3">{s.eligibility}</p>
+            <p className="text-gray-500 text-xs mb-2">{s.eligibility}</p>
+            {s.match_reason && (
+              <p className="text-gray-600 text-xs italic mb-3">💡 {s.match_reason}</p>
+            )}
             <div className="flex items-center justify-between">
               <span className="text-gray-600 text-xs">📅 {s.deadline}</span>
               <a href={s.link} target="_blank" rel="noopener noreferrer"
