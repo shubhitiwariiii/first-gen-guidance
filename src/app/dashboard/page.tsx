@@ -2,11 +2,11 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import ScholarshipFinder from '@/components/ScholarshipFinder'
 import DeadlineTracker from '@/components/DeadlineTracker'
-import MentorList from '@/components/MentorList'
-import BecomeMentor from '@/components/BecomeMentor'
+import MentorTips from '@/components/MentorTips'
+import ShareMentorTip from '@/components/ShareMentorTip'
 import DocumentUpload from '@/components/DocumentUpload'
 import Sidebar from '@/components/Sidebar'
-import ApplicationTracker from '@/components/ApplicationTracker'
+
 
 
 export default async function DashboardPage() {
@@ -104,9 +104,9 @@ export default async function DashboardPage() {
                 <ScholarshipFinder profile={profile} hasAllDocs={hasAllDocs} />
               </div>
               <div id="mentors">
-                <MentorList profile={profile} />
+                <MentorTips profile={profile} />
               </div>
-              <BecomeMentor userId={user.id} profile={profile} />
+              <ShareMentorTip userId={user.id} profile={profile} />
             </div>
 
             {/* Right - 1 col */}
@@ -116,9 +116,6 @@ export default async function DashboardPage() {
               </div>
               <div id="documents">
                 <DocumentUpload userId={user.id} />
-              </div>
-              <div id="applications">
-                <ApplicationTracker userId={user.id} />
               </div>
             </div>
 
