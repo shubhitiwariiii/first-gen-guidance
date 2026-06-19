@@ -36,7 +36,7 @@ Students from non-English, non-urban families in India have **no one to guide th
 
 ### Dashboard
 ![Dashboard](screenshots/6-dashboard.png)
-![Mentors](screenshots/7-mentors.png)
+![Mentors](screenshots/7-mentorsTips.png)
 ![Documents](screenshots/9-documents.png)
 
 ### Profile
