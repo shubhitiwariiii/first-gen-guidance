@@ -14,6 +14,8 @@ Student Profile:
 - Caste Category: ${profile.caste_category || "General"}
 - Gender: ${profile.gender || "Not specified"}
 
+IMPORTANT: For the "link" field, ONLY use the official organization's main homepage URL (e.g. https://scholarships.gov.in, https://www.aicte-india.org, https://www.hdfcbank.com) — NOT a specific scheme sub-page, since those change frequently and break. Use only well-known, stable government or organization domains you are confident exist.
+
 For each scholarship, calculate a match_score (0-100) based on how well the student's profile fits the eligibility criteria — consider income bracket fit, stream relevance, state/domicile match, and class level fit. Also give a one-line match_reason explaining the score.
 
 Return ONLY a valid JSON array, sorted by match_score descending. No explanation, no markdown, no backticks. Just raw JSON:
@@ -48,13 +50,27 @@ Return ONLY a valid JSON array, sorted by match_score descending. No explanation
     const match = text.match(/\[[\s\S]*\]/);
     if (!match)
       throw new Error("No JSON array found in response: " + text.slice(0, 200));
-    if (!match) throw new Error("No JSON array found in response");
     const scholarships = JSON.parse(match[0]);
-    return NextResponse.json(scholarships);
-    // } catch (error: any) {
-    //   console.error("Gemini error:", error);
-    //   return NextResponse.json({ error: error.message }, { status: 500 });
-    // }
+
+    // Verify links are live, replace broken ones with a safe fallback
+    const verifiedScholarships = await Promise.all(
+      scholarships.map(async (s: any) => {
+        try {
+          const checkRes = await fetch(s.link, {
+            method: "HEAD",
+            signal: AbortSignal.timeout(3000),
+          });
+          if (checkRes.ok || checkRes.status < 400) {
+            return s;
+          }
+          return { ...s, link: "https://scholarships.gov.in" };
+        } catch {
+          return { ...s, link: "https://scholarships.gov.in" };
+        }
+      }),
+    );
+
+    return NextResponse.json(verifiedScholarships);
   } catch (error: any) {
     console.error("Gemini error:", error);
     return NextResponse.json([
