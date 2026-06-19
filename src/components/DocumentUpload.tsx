@@ -88,7 +88,7 @@ export default function DocumentUpload({ userId }: { userId: string }) {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-white font-semibold">Documents</h2>
-            <p className="text-gray-500 text-xs mt-0.5">{documents.length} file{documents.length !== 1 ? 's' : ''} uploaded</p>
+            <p className="text-gray-500 text-xs mt-0.5">{documents.length} file{documents.length !== 1 ? 's' : ''} uploaded · Keep ready for applying on scholarship sites</p>
           </div>
           {allDocsUploaded ? (
             <div className="flex items-center gap-1.5 text-emerald-400 text-xs font-medium bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full">
