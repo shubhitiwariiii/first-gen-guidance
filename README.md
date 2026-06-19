@@ -1,7 +1,6 @@
 <div align="center">
 
 # 🎓 FirstGen Guidance
-
 ### AI-powered scholarship & career guidance platform for first-generation Indian students
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org/)
@@ -52,14 +51,17 @@ Students from non-English, non-urban families in India have **no one to guide th
 | Email auth (signup / login) | ✅ Live |
 | Multi-step onboarding (4 steps) | ✅ Live |
 | Student profile saved to database | ✅ Live |
-| AI scholarship finder (Gemini) | ✅ Live |
+| AI scholarship finder (Gemini 2.5 Flash, live matching) | ✅ Live |
 | Deadline tracker | ✅ Live |
-| Peer mentor matching | ✅ Live |
-| Become a mentor registration | ✅ Live |
+| Mentor Tips — real Q&A from peer mentors (no direct contact, privacy-safe) | ✅ Live |
+| Share a Tip — mentors submit advice instead of exposing contact info | ✅ Live |
 | Document upload with checklist | ✅ Live |
 | Profile edit page | ✅ Live |
+| Dynamic progress tracker (auto-updates as you complete steps) | ✅ Live |
 | Modern dark UI with sidebar | ✅ Live |
 | Deployment on Vercel | ✅ Live |
+
+> **Safety note:** Earlier versions used direct WhatsApp mentor connections. This was replaced with a Q&A-based Mentor Tips system — no personal contact info is exchanged between students.
 
 ---
 
@@ -68,7 +70,7 @@ Students from non-English, non-urban families in India have **no one to guide th
 | Feature | Status |
 |---|---|
 | Vernacular language UI (Hindi, Tamil...) | 📅 Planned |
-| WhatsApp deadline notifications | 📅 Planned |
+| Email/WhatsApp deadline notifications | 📅 Planned |
 | State-wise scholarship database | 📅 Planned |
 | Mobile app (React Native) | 📅 Planned |
 
@@ -82,7 +84,7 @@ Students from non-English, non-urban families in India have **no one to guide th
 | Backend | Next.js API Routes |
 | Database + Auth | Supabase (PostgreSQL + Row Level Security) |
 | File Storage | Supabase Storage |
-| AI | Google Gemini 2.0 Flash |
+| AI | Google Gemini 2.5 Flash |
 | Deployment | Vercel |
 
 ---
