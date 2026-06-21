@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
-import { GraduationCap, Check, PartyPopper } from 'lucide-react'
+import { GraduationCap, Check } from 'lucide-react'
 
 export default function OnboardingPage() {
   const supabase = createClient()
@@ -62,50 +62,31 @@ export default function OnboardingPage() {
   const labelClass = "block text-gray-400 text-xs font-medium mb-1.5"
   const sectionLabel = "text-gray-500 text-xs font-semibold uppercase tracking-wide"
 
+  // Success screen takes over completely — render it alone, nothing else
+  if (success) {
+    return (
+      <div className="fixed inset-0 min-h-[100dvh] w-full bg-[#030712] flex flex-col items-center justify-center z-50 px-4">
+        <div className="w-20 h-20 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mb-6">
+          <Check className="w-10 h-10 text-emerald-400" strokeWidth={3} />
+        </div>
+        <h2 className="text-white font-bold text-2xl mb-2">Profile complete!</h2>
+        <p className="text-gray-500 text-sm">Taking you to your dashboard...</p>
+        <div className="mt-6 w-48 h-1 bg-white/5 rounded-full overflow-hidden">
+          <div className="h-full bg-emerald-500 rounded-full" style={{ animation: 'progressFill 2.2s linear forwards' }} />
+        </div>
+        <style jsx>{`
+          @keyframes progressFill {
+            from { width: 0% }
+            to { width: 100% }
+          }
+        `}</style>
+      </div>
+    )
+  }
+
   return (
-    <div className="min-h-screen bg-[#030712] flex items-center justify-center px-4 py-10">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-blue-600/8 rounded-full blur-[120px] pointer-events-none" />
-
-      {/* Success modal */}
-      {/* {success && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-          <div className="bg-[#0d0d14] border border-white/10 rounded-2xl p-8 max-w-sm w-full text-center animate-in fade-in zoom-in duration-300">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4">
-              <Check className="w-8 h-8 text-emerald-400" strokeWidth={3} />
-            </div>
-            <h2 className="text-white font-bold text-lg mb-1">Profile complete!</h2>
-            <p className="text-gray-500 text-sm">Taking you to your dashboard...</p>
-            <div className="mt-5 h-1 bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full bg-emerald-500 rounded-full animate-[progress_2.2s_linear]" style={{ animation: 'progressFill 2.2s linear forwards' }} />
-            </div>
-          </div>
-          <style jsx>{`
-            @keyframes progressFill {
-              from { width: 0% }
-              to { width: 100% }
-            }
-          `}</style>
-        </div>
-      )} */}
-
-      {success && (
-        <div className="fixed inset-0 bg-[#030712] flex flex-col items-center justify-center z-50 px-4">
-          <div className="w-20 h-20 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mb-6">
-            <Check className="w-10 h-10 text-emerald-400" strokeWidth={3} />
-          </div>
-          <h2 className="text-white font-bold text-2xl mb-2">Profile complete!</h2>
-          <p className="text-gray-500 text-sm">Taking you to your dashboard...</p>
-          <div className="mt-6 w-48 h-1 bg-white/5 rounded-full overflow-hidden">
-            <div className="h-full bg-emerald-500 rounded-full" style={{ animation: 'progressFill 2.2s linear forwards' }} />
-          </div>
-          <style jsx>{`
-      @keyframes progressFill {
-        from { width: 0% }
-        to { width: 100% }
-      }
-    `}</style>
-        </div>
-      )}
+    <div className="min-h-[100dvh] bg-[#030712] flex items-center justify-center px-4 py-10">
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-blue-600/8 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="w-full max-w-lg relative">
 
