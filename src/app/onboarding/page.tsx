@@ -67,7 +67,7 @@ export default function OnboardingPage() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-blue-600/8 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Success modal */}
-      {success && (
+      {/* {success && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 px-4">
           <div className="bg-[#0d0d14] border border-white/10 rounded-2xl p-8 max-w-sm w-full text-center animate-in fade-in zoom-in duration-300">
             <div className="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4">
@@ -85,6 +85,25 @@ export default function OnboardingPage() {
               to { width: 100% }
             }
           `}</style>
+        </div>
+      )} */}
+
+      {success && (
+        <div className="fixed inset-0 bg-[#030712] flex flex-col items-center justify-center z-50 px-4">
+          <div className="w-20 h-20 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mb-6">
+            <Check className="w-10 h-10 text-emerald-400" strokeWidth={3} />
+          </div>
+          <h2 className="text-white font-bold text-2xl mb-2">Profile complete!</h2>
+          <p className="text-gray-500 text-sm">Taking you to your dashboard...</p>
+          <div className="mt-6 w-48 h-1 bg-white/5 rounded-full overflow-hidden">
+            <div className="h-full bg-emerald-500 rounded-full" style={{ animation: 'progressFill 2.2s linear forwards' }} />
+          </div>
+          <style jsx>{`
+      @keyframes progressFill {
+        from { width: 0% }
+        to { width: 100% }
+      }
+    `}</style>
         </div>
       )}
 
