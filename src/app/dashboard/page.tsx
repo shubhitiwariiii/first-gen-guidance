@@ -6,8 +6,7 @@ import MentorTips from '@/components/MentorTips'
 import ShareMentorTip from '@/components/ShareMentorTip'
 import DocumentUpload from '@/components/DocumentUpload'
 import Sidebar from '@/components/Sidebar'
-
-
+import { GraduationCap, BookOpen, Wallet, FileText } from 'lucide-react'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -73,20 +72,22 @@ export default async function DashboardPage() {
         </div>
 
         {/* Content */}
-        <div className="p-8 space-y-8">
+        <div className="p-4 sm:p-8 space-y-6 sm:space-y-8">
 
           {/* Stats row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { label: 'Class', value: profile.class_level, icon: '🎓' },
-              { label: 'Stream', value: profile.stream, icon: '📚' },
-              { label: 'Income Group', value: profile.family_income, icon: '💰' },
-              { label: 'Documents', value: `${documents?.length || 0}/4`, icon: '📄' },
+              { label: 'Class', value: profile.class_level, icon: GraduationCap, color: 'text-blue-400 bg-blue-500/10' },
+              { label: 'Stream', value: profile.stream, icon: BookOpen, color: 'text-violet-400 bg-violet-500/10' },
+              { label: 'Income Group', value: profile.family_income, icon: Wallet, color: 'text-emerald-400 bg-emerald-500/10' },
+              { label: 'Documents', value: `${documents?.length || 0}/4`, icon: FileText, color: 'text-yellow-400 bg-yellow-500/10' },
             ].map(stat => (
-              <div key={stat.label} className="bg-white/3 border border-white/8 rounded-2xl p-5 hover:bg-white/5 transition-all">
+              <div key={stat.label} className="bg-white/3 border border-white/8 rounded-2xl p-4 sm:p-5 hover:bg-white/5 transition-all">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-gray-500 text-xs font-medium uppercase tracking-wide">{stat.label}</span>
-                  <span className="text-lg">{stat.icon}</span>
+                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${stat.color}`}>
+                    <stat.icon className="w-3.5 h-3.5" />
+                  </div>
                 </div>
                 <p className="text-white font-semibold text-sm">{stat.value || '—'}</p>
               </div>
