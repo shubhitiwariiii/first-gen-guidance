@@ -50,7 +50,7 @@ export default function Sidebar({ name, email, uploadedCount = 0, scholarshipsFo
         />
       )}
 
-      <aside className={`fixed left-0 top-0 h-screen w-[220px] bg-[#0d0d14] border-r border-white/5 flex flex-col z-50 transition-transform duration-300 ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+      <aside className={`fixed left-0 top-0 h-screen w-[220px] bg-[#0d0d14] border-r border-white/5 flex flex-col z-50 transition-transform duration-300 overflow-y-auto ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
 
         <div className="px-5 py-5 border-b border-white/5 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
